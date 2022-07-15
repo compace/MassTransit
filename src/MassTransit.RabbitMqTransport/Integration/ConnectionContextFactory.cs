@@ -94,7 +94,7 @@ namespace MassTransit.RabbitMqTransport.Integration
 
                 if (_configuration.Settings.ClusterMembers?.Any() ?? false)
                 {
-                    connection = _connectionFactory.Value.CreateConnection(_configuration.Settings.ClusterMembers, _configuration.Settings.ClientProvidedName);
+                    connection = _connectionFactory.Value.CreateConnection(_configuration.Settings.HostNameSelector, _configuration.Settings.ClientProvidedName);
                 }
                 else
                 {

@@ -61,7 +61,10 @@ namespace MassTransit.RabbitMqTransport.Transport
 
             Interlocked.Increment(ref _nextHostIndex);
 
-            yield return new AmqpTcpEndpoint(_lastHost);
+            var parts = _lastHost.Split(':');
+            yield return parts.Length > 1 ?
+                new AmqpTcpEndpoint(parts[0], Convert.ToInt32(parts[1])) :
+                new AmqpTcpEndpoint(_lastHost);
         }
     }
 }
